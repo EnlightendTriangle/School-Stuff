@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cross word Puzzel</title>
+<style>
+
+#cross{
+	text-align: center;
+	width:30px;
+	height:30px;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+	border: 1px solid white;
+}
+#buttons{
+	width:30%;
+	float: right;
+}
+tr{
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+}
+td{
+	height: 30px;
+	width: 30px;
+}
+#leftBox{
+	float: left;
+}
+#rightBox{
+	float: left;
+	clear:left;
+}
+.butt{
+	height:50px;
+	width: 107px;
+}
+#puzzel{
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+.inputBox{
+		width: 40px;
+		height:40px;
+		border: 1px solid black;
+		text-align: center;
+}
+#hintsTable{
+	width: 480px;
+	float: left;
+	clear: left;
+}
+</style>
+
+<script>
+//Globals
+var currentTextInput;
+var puzzelArrayData;
+//Loads the Crossword
+function initializeScreen(){
+	var puzzelTable = document.getElementById("puzzel");
+	puzzelArrayData = preparePuzzelArray();
+	for ( var i = 0; i < puzzelArrayData.length ; i++ ) {
+		var row = puzzelTable.insertRow(-1);
+		var rowData = puzzelArrayData[i];
+		for(var j = 0 ; j < rowData.length ; j++){
+			var cell = row.insertCell(-1);
+			if(rowData[j] != 0){
+				var txtID = String('txt' + '_' + i + '_' + j);
+				cell.innerHTML = '<input type="text" class="inputBox" maxlength="1" style="text-transform: lowercase" ' + 'id="' + txtID + '" onfocus="textInputFocus(' + "'" + txtID + "'"+ ')">';
+			}else{
+				cell.style.backgroundColor  = "black";
+			}
+		}
+	}
+	addHint();
+}
+//Adds the hint numbers
+function addHint(){
+	document.getElementById("txt_0_4").placeholder = "1";
+	document.getElementById("txt_2_6").placeholder = "2";
+	document.getElementById("txt_3_1").placeholder = "3";
+	document.getElementById("txt_3_9").placeholder = "4";
+	document.getElementById("txt_6_2").placeholder = "5";
+	document.getElementById("txt_9_0").placeholder = "6";
+}
+
+</script>
+</head>
+<body onload="initializeScreen()">
+<div id="leftBox">
+<table id="puzzel">
+
+</table>
+</div>
+<div id="rightBox">
+<table>
+	<tr><td><input class="butt"  type="submit" value="Clear All" onclick="clearAllClicked()"></td>
+	<td><input class="butt"  type="submit" value="Check" onclick="checkClicked()"></td>
+	<td><input class="butt"  type="submit" value="Solve" onclick="solveClicked()"></td>
+	<td><input class="butt"  type="submit" value="Clue" onclick="clueClicked()"></td></tr>
+</table>
+</div>
+<table id="hintsTable">
+		<tr>
+			<td><strong>Horizontal:</strong></td><td><strong>Vertical:</strong></td>
+		</tr>
+		<tr>
+			<td>3. Cultural Hub (Hyderabad)</td><td>1. Education Hub (Pune)</td>
+		</tr>
+		<tr>
+			<td>5. India's financial capital (Mumbai)</td><td>2. Information Technology Hub (Bangalore)</td>
+		</tr>
+		<tr>
+			<td>6. Saffron region (Kashmir)</td><td>4. Capital of India (Delhi)</td>
+</table>
+
+</body>
+</html>
