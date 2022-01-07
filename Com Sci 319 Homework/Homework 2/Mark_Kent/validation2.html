@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset = "utf-8"/>
+<script src="./validation2.js"></script>
+
+<style>
+table {
+  font-family: "Times New Roman";
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #000000;
+  text-align: center;
+  padding: 20px;
+}
+
+
+</style>
+<title>Contact Information</title>
+</head>
+<body>
+
+	<form id="validation2" action="">
+	  
+
+<table>
+  <tr>
+    <th>FIELD LABEL</th>
+    <th>Field Type</th>
+    <th>Validation Rule</th>
+    <th>Result</th>
+  </tr>
+  <tr>
+    <td>Email</td>
+	<p id="email">
+    <td><input type = "text" id = "email" value = ""><br></td>
+	</p>
+    <td><strong>*Required.</strong><p>Must be in the form xxx@xxx.xxxx should be alphanumeric (e.g. no special symbols).</p></td>
+	<td><p id="x"></td>
+  </tr>
+  <tr>
+    <td>Phone</td>
+	<p id="phone">
+    <td><input type = "text" id = "phone" value = ""><br></td>
+	</p>
+    <td><strong>*Required.</strong><p>Must be in the form xxx-xxx-xxxx or xxxxxxxxxx. x should be numeric</p></td>
+	<td><p id="y"></td>
+  </tr>
+  <tr>
+    <td>Address</td>
+	<p id="address">
+    <td><input type = "text" id = "address" value = ""><br></td>
+	</p>
+    <td><strong>*Required</strong><p>Must be in the form of city & state. example: Ames,IA</p></td>
+	<td><p id="z"></td>
+  </tr>
+</table>
+
+<p><strong>*Required field = Cannot be Empty</strong></p>
+
+<input onCLick="validate2()" type="button" id="continue" name="continue" value="Submit"/>
+	
+ </form>
+
+</body>
+</html>
