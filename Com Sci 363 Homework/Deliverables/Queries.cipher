@@ -1,0 +1,17 @@
+1) match (t:Tweet)<-[:POSTED]-(u:User) WHERE t.year='2016' AND t.month='1' RETURN tointeger(t.retweet_count), t.text, u.screen_name, u.category, u.sub_category ORDER BY tointeger(t.retweet_count) DESC limit 5
+
+2) match(h:Hashtag)-[:TAGGED]->(t:Tweet)<-[:POSTED]-(u:User)-[:FROM]->(s:State) where t.year="2016" and h.name<>'' and s.name<>'' and s.name<>"na" return count(distinct(s.name)) as statenum, collect(distinct(s.name)) as statelist, toUpper(h.name) as hashtag order by statenum desc limit 5
+
+3) match (u:User)-[:POSTED]->(t:Tweet)<-[:TAGGED]-(h:Hashtag) WHERE h.name IN ['HappyNewYear', 'NewYear,NewYears','NewYearsDay'] WITH distinct u return u.screen_name, u.location, u.followers order by tointeger(u.followers) desc limit 5
+
+4) 
+
+5) match (h:Hashtag)-[:TAGGED]->(t:Tweet)<-[:POSTED]-(u:User)-[:FROM]->(s:State) WHERE s.name IN ['Ohio', 'Alaska', 'Alabama'] AND t.month = "1" AND t.year = '2016' return toUpper(h.name), collect(distinct s.name)
+
+6) match (u:User)-[:POSTED]->(t:Tweet)<-[:TAGGED]-(h:Hashtag) where u.location="Ohio" and h.name=~'Ohio' and t.month='1' and t.year='2016' return t.text, h.name, u.screen_name, u.sub_category limit 5
+
+7) match (s:State)<-[:FROM]-(u:User{sub_category:"GOP"})-[:POSTED]->(t:Tweet)-[:URL_USED]->(ur:Url) WHERE t.year = '2016' AND t.month = '1' WITH u, collect(ur.url) as url_list return u.screen_name, u.location, url_list
+
+8) match ((a:User)-[:POSTED]->(b:Tweet)-[c:MENTIONED]->(d:User)) optional match((d)-[:FROM]->(e:State)) with a,b,c,d,e where a.sub_category="GOP" and d.screen_name<>''and b.year="2016" and b.month='1' with count(distinct(c)) as num, d.screen_name as mentionedUser, e.name as stateOfMentionedUser, collect(distinct(a.screen_name)) as listMentioningUsers return mentionedUser, stateOfMentionedUser, listMentioningUsers order by num desc limit 5
+
+9) match(h:Hashtag)-[:TAGGED]->(t:Tweet)<-[:POSTED]-(u:User) where h.name<>'' and u.sub_category=~'(?i)GOP' and t.month in ["1","2","3"] and t.year="2016" return toUpper(h.name), count(h) as numUses order by numUses desc limit 5 
